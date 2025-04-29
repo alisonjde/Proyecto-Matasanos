@@ -24,6 +24,20 @@ class Consultorio{
         $this -> nombre = $nombre;
         $this -> especialidad = $especialidad;
     }
+
+    public function consultar(){
+        $conexion = new Conexion();
+        $consultorioDAO = new ConsultorioDAO();
+        $conexion -> abrir();
+        $conexion -> ejecutar($consultorioDAO -> consultar());
+        $consultorios = array();
+        while(($datos = $conexion -> registro()) != null){
+            $consultorio = new Consultorio($datos[0], $datos[1], $this -> especialidad);
+            array_push($consultorios, $consultorio);
+        }
+        $conexion -> cerrar();
+        return $consultorios;
+    }
     
     
     

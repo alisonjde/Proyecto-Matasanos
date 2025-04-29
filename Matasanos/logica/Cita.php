@@ -49,7 +49,15 @@ class Cita{
         $conexion -> ejecutar($citaDAO -> consultar());
         $citas = array();
         while(($datos = $conexion -> registro()) != null){
-            $cita = new Cita($datos[0], $datos[1], $datos[2],$this -> paciente,$this -> medico,$this -> consultorio);
+            $paciente = new Paciente("",$datos[3]);
+            $medico = new Medico("",$datos[4]);
+            $consultorio = new Consultorio("",$datos[5]);
+            $cita = new Cita($datos[0],
+            $datos[1],
+            $datos[2],
+            $paciente,
+            $medico,
+            $consultorio);
             array_push($citas, $cita);
         }
         $conexion -> cerrar();

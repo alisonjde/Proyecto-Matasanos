@@ -18,6 +18,10 @@ class MedicoDAO{
         $this -> foto = $foto;
         $this -> idEspecialidad = $idEspecialidad;
     }
+    public function consultar(){
+        return "select idMedico, nombre, apellido, correo
+                from Medico;";
+    }
 
     public function consultarPorEspecialidad($idEspecialidad){
         return "select idMedico, nombre, apellido, correo

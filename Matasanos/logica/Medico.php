@@ -17,6 +17,25 @@ class Medico extends Persona {
         return $this -> especialidad;
     }
 
+    public function consultar(){
+        $conexion = new Conexion();
+        $medicoDAO = new MedicoDAO();
+        $conexion -> abrir();
+        $conexion -> ejecutar($medicoDAO -> consultar());
+        $medicos = array();
+        while (($datos = $conexion->registro()) != null) {
+            $medico = new Medico(
+                $datos[0], // id
+                $datos[1], // nombre
+                $datos[2], // apellido
+                $datos[3], // correo
+            );
+            array_push($medicos, $medico);
+        }
+        $conexion->cerrar();
+        return $medicos;
+    }
+
     public function consultarPorEspecialidad(){
         $conexion = new Conexion();
         $medicoDAO = new MedicoDAO();

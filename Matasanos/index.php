@@ -109,8 +109,8 @@ require("logica/Cita.php");
 					<th scope="col">IdCita</th>
 					<th scope="col">Fecha</th>
 					<th scope="col">Hora</th>
-					<th scope="col">Paciente</th>
-					<th scope="col">Medico</th>
+					<th scope="col">Nombre Paciente</th>
+					<th scope="col">Nombre Medico</th>
 					<th scope="col">Consultorio</th>
 				</tr>
 			</thead>
@@ -118,21 +118,28 @@ require("logica/Cita.php");
 			<tbody>
 			<?php
 			$paciente = new Paciente();
+			$pacientes = $paciente -> consultar();//
 			$medico = new Medico();
+			$medicos = $medico -> consultar();//
 			$consultorio = new Consultorio();
+			$consultorios= $consultorio -> consultar();//
 			$cita = new Cita("", "", "", $paciente, $medico, $consultorio);
 			$citas = $cita->consultar();
 			if (count($citas) > 0) {
+				
 				foreach ($citas as $cit) {
+					
+						
 					echo "<tr>";
 						echo "<td>" . $cit->getId() . "</td>";
 						echo "<td>" . $cit->getFecha() . "</td>";
 						echo "<td>" . $cit->getHora() . "</td>";
-						echo "<td>" . $paciente->getNombre() . "</td>";
-						echo "<td>" . $medico->getNombre() . "</td>";
-						echo "<td>" . $consultorio->getNombre() . "</td>";
+						echo "<td>" . $cit->getPaciente()->getNombre() . "</td>"; 		
+						echo "<td>" . $cit->getMedico()->getNombre() . "</td>";
+						echo "<td>" . $cit->getConsultorio()->getNombre() . "</td>";
 					echo "</tr>";
 				}
+				
 				
 			}
 						

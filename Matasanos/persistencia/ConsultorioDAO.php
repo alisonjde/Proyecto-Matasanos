@@ -11,6 +11,10 @@ class ConsultorioDAO{
         $this -> especialidad = $especialidad;
     }
     
+    public function consultar(){
+        return "select idConsultorio, nombre, Especialidad_IdEspecialidad
+                from Consultorio";
+    }
 
     
     

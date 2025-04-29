@@ -16,5 +16,10 @@ class PacienteDAO{
 
     }
 
+    public function consultar(){
+        return "select idPaciente, nombre, apellido, correo
+                from Paciente;";
+    }
+
 }
 ?>
