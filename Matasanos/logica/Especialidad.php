@@ -24,7 +24,7 @@ class Especialidad{
         $conexion = new Conexion();
         $especialidadDAO = new EspecialidadDAO();
         $conexion -> abrir();
-        $conexion -> ejecutar( $especialidadDAO -> consultar());
+        $conexion -> ejecutar($especialidadDAO -> consultar());
         $especialidades = array();
         while(($datos = $conexion -> registro()) != null){
             $especialidad = new Especialidad($datos[0], $datos[1]);
@@ -33,7 +33,8 @@ class Especialidad{
         $conexion -> cerrar();
         return $especialidades;
     }
-       
+    
+    
 }
 
 
