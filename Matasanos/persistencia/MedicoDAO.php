@@ -18,10 +18,6 @@ class MedicoDAO{
         $this -> foto = $foto;
         $this -> idEspecialidad = $idEspecialidad;
     }
-    public function consultar(){
-        return "select idMedico, nombre, apellido, correo
-                from Medico;";
-    }
 
     public function consultarPorEspecialidad($idEspecialidad){
         return "select idMedico, nombre, apellido, correo
@@ -29,5 +25,16 @@ class MedicoDAO{
                 where Especialidad_idEspecialidad = $idEspecialidad
                 order by apellido asc";
     }
+    
+    public function autenticar(){
+        return "select idMedico
+                from Medico
+                where correo = '" . $this -> correo . "' and '" . md5($this -> clave) . "'";
+    }
+    
+    public function consultar(){
+        return "select m.nombre, m.apellido, m.correo, m.foto, e.idEspecialidad, e.nombre  
+                from Medico m join Especialidad e on m.Especialidad_idEspecialidad = e.idEspecialidad
+                where idMedico = '" . $this -> id . "'";
+    }
 }
-?>
