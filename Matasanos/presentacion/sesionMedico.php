@@ -3,7 +3,7 @@ $id = $_SESSION["id"];
 $medico = new Medico($id);
 $medico -> consultar();
 
-if($medico -> mensaje == True){
+if($medico -> getConfirmar() == false){
     header("Location: ?pid=" . base64_encode("presentacion/autenticar.php"));
 }else{
     echo "Hola " . $medico -> getNombre() . " " . $medico -> getApellido();

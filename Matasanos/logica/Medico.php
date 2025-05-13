@@ -6,7 +6,7 @@ require_once("persistencia/MedicoDAO.php");
 class Medico extends Persona {
     private $foto;
     private $especialidad;
-    public $mensaje;
+    private $confirmar=true;
 
     public function __construct($id = "", $nombre = "", $apellido = "", $correo = "", $clave = "", $foto = "", $especialidad = ""){
         parent::__construct($id, $nombre, $apellido, $correo, $clave);
@@ -14,6 +14,9 @@ class Medico extends Persona {
         $this -> especialidad = $especialidad;
     }
     
+    public function getConfirmar(){
+        return $this -> confirmar;
+    }
     public function getEspecialidad(){
         return $this -> especialidad;
     }
@@ -67,7 +70,7 @@ class Medico extends Persona {
         $this -> foto = $datos[3];
         $this -> especialidad = new Especialidad($datos[4], $datos[5]);
         if(!isset($this -> nombre)){
-            $this -> mensaje=True;
+            $this -> confirmar=false;
         }
         $conexion->cerrar();
     }
