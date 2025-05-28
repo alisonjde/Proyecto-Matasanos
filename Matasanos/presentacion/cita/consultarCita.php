@@ -25,7 +25,7 @@ $cita = new Cita();
 			echo "<div class= 'container mt-2'><div class='alert alert-success' role='alert'>
   			 Estado modificado
 			</div></div>";
-		} elseif($cambiarEstado==false) {
+		} else {
 			echo "<div class= 'container mt-2'><div class='alert alert-success' role='alert'>
   			 Error en modificar estado
 			</div></div>";
