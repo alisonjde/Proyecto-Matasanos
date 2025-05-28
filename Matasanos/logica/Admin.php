@@ -5,14 +5,8 @@ require_once("persistencia/AdminDAO.php");
 
 class Admin extends Persona {
 
-    private $confirmar=true;
-    
     public function __construct($id = "", $nombre = "", $apellido = "", $correo = "", $clave = ""){
         parent::__construct($id, $nombre, $apellido, $correo, $clave);
-    }
-
-    public function getConfirmar(){
-        return $this -> confirmar;
     }
     
     public function autenticar(){
@@ -39,9 +33,6 @@ class Admin extends Persona {
         $this -> nombre = $datos[0];
         $this -> apellido = $datos[1];
         $this -> correo = $datos[2];
-        if(!isset($this -> nombre)){
-            $this -> confirmar=false;
-        }
         $conexion->cerrar();
     }
 }

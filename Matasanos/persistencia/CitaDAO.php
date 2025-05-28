@@ -16,12 +16,26 @@ class CitaDAO{
         $this -> consultorio = $consultorio;
     }
     
-    public function consultar(){
-        return "select c.idCita, c.fecha, c.hora, p.idPaciente, p.nombre, p.apellido, m.idMedico, m.nombre, m.apellido, con.idConsultorio, con.nombre
+    public function consultar($rol, $id){
+        $sentencia = "SELECT c.idCita, c.fecha, c.hora, p.idPaciente, p.nombre, p.apellido, m.idMedico, m.nombre, m.apellido, con.idConsultorio, con.nombre, e.idEstadoCita, e.valor
                 from Cita c join Paciente p on c.Paciente_idPaciente = p.idPaciente
                             join Medico m on c.Medico_idMedico = m.idMedico
-                            join Consultorio con on c.Consultorio_idConsultorio = con.idConsultorio";    
+                            join Consultorio con on c.Consultorio_idConsultorio = con.idConsultorio
+                            join EstadoCita e on c.EstadoCita_idEstadoCita = e.idEstadoCita";    
+        if($rol == "medico"){
+            $sentencia .= " where m.idMedico = '" . $id . "'"; 
+        }else if($rol == "paciente"){
+            $sentencia .= " where p.idPaciente = '" . $id . "'";
+        }
+        return $sentencia;
     }
+
+    public function ModificarEstado($estado, $idCita){
+        
+        return "UPDATE cita SET EstadoCita_idEstadoCita = $estado WHERE idCita = $idCita";
+
+    }
+    
     
     
     

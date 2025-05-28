@@ -18,7 +18,7 @@ class AdminDAO{
     public function autenticar(){
         return "select idAdmin
                 from Admin 
-                where correo = '" . $this -> correo . "' and '" . md5($this -> clave) . "'";
+                where correo = '" . $this -> correo . "' and clave = '" . md5($this -> clave) . "'";
     }
     
     public function consultar(){

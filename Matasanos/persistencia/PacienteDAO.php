@@ -6,20 +6,27 @@ class PacienteDAO{
     private $apellido;
     private $correo;
     private $clave;
+    private $fechaNacimiento;
 
-    public function __construct($id = 0, $nombre = "", $apellido = "", $correo = "", $clave = "",){
+    public function __construct($id = 0, $nombre = "", $apellido = "", $correo = "", $clave = "", $fechaNacimiento = ""){
         $this -> id = $id;
         $this -> nombre = $nombre;
         $this -> apellido = $apellido;
         $this -> correo = $correo;
         $this -> clave = $clave;
-
+        $this -> fechaNacimiento = $fechaNacimiento;
     }
 
+       
+    public function autenticar(){
+        return "select idPaciente
+                from Paciente
+                where correo = '" . $this -> correo . "' and clave = '" . md5($this -> clave) . "'";
+    }
+    
     public function consultar(){
-        return "select idPaciente, nombre, apellido, correo
-                from Paciente;";
+        return "select p.nombre, p.apellido, p.correo, p.fechaNacimiento  
+                from Paciente p
+                where idPaciente = '" . $this -> id . "'";
     }
-
 }
-?>
