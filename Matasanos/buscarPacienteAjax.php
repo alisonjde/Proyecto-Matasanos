@@ -17,11 +17,7 @@ if(count($pacientes) > 0){
         $nombre = $pac->getNombre();
         $apellido = $pac->getApellido();
         
-        $filtrosEscapados = array_map(function($f) {
-            return preg_quote($f, '/');
-        }, $filtros);
-        
-        $patron = '/(' . implode('|', $filtrosEscapados) . ')/i';
+        $patron = '/(' . implode('|', $filtros) . ')/i';
 
         $nombre = preg_replace_callback($patron, function($coincidencias) {
             return "<strong>" . $coincidencias[0] . "</strong>";
