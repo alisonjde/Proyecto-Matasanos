@@ -29,4 +29,18 @@ class PacienteDAO{
                 from Paciente p
                 where idPaciente = '" . $this -> id . "'";
     }
+
+    public function buscar($filtros){
+        $condiciones = [];
+        foreach ($filtros as $filtro){
+            $condiciones[] = "(p.nombre LIKE '%$filtro%' OR p.apellido LIKE '%$filtro%')";
+        }
+
+        $consulta = implode("AND",$condiciones);
+
+        $sentencia = "SELECT p.idPaciente, p.nombre, p.apellido, p.correo
+                FROM paciente p
+                WHERE $consulta";
+        return $sentencia;
+    }
 }
